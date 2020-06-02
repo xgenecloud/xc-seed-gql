@@ -71,7 +71,7 @@ class AuthService extends BaseService {
       throw new Error({msg: `Email '${args.data.email}' already registered`})
     }
 
-    if (!validator.isEmail(req.body.email)) {
+    if (!validator.isEmail(args.data.email)) {
       throw new Error({msg: `Invalid email`});
     }
 
