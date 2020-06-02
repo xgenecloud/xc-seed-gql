@@ -92,6 +92,7 @@ describe('Our application', function () {
         .expect(200)
         .end(function (err, res) {
           if (err) done(err);
+          console.log('response body ', res.body);
           const data = res.body.data;
           expect(data.SignIn).to.be.a('object')
           expect(data.SignIn.email).to.be.equal(EMAIL_ID)
@@ -109,6 +110,7 @@ describe('Our application', function () {
         .expect(200)
         .end(function (err, res) {
           if (err) done(err);
+          console.log('response body ', res.body);
           const data = res.body.data;
           expect(data.Me).to.be.a('object')
           expect(data.Me.email).to.be.equal(EMAIL_ID)
