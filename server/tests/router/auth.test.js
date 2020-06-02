@@ -1,26 +1,22 @@
 /* eslint-disable */
-// const assert = require('assert');
 const {expect} = require('chai');
 const request = require('supertest');
 const session = require('supertest-session');
-// const app = require('../app')
 const {Components} = require('xc-core');
 
-
 describe('Our application', function () {
+
   let app, appServer, httpSession, appContext;
 
-
-  // Called once before any of the tests in this block begin.
   before(function (done) {
+
     (async () => {
+
       appContext = new Components(require('../app.config').config);
-
-
       await appContext.init();
 
-      appContext.$router.start();
-      app = appContext.$router.router;
+      appContext.router.start();
+      app = appContext.$router;
       appServer = appContext.$router.server;
       httpSession = session(app);
 
@@ -33,10 +29,7 @@ describe('Our application', function () {
       }
 
 
-    })().then(done).catch(err => {
-      console.log(err);
-      done(err);
-    });
+    })().then(done).catch(done);
   });
 
 
@@ -52,7 +45,6 @@ describe('Our application', function () {
 
     const EMAIL_ID = 'abc@g.com'
     const VALID_PASSWORD = '1234566778';
-
 
     it('Signup with valid email', function (done) {
       request(app)
@@ -74,7 +66,6 @@ describe('Our application', function () {
           done();
         });
     });
-
 
     it('Signup with invalid email', function (done) {
       request(app)
@@ -142,7 +133,6 @@ describe('Our application', function () {
 
     });
 
-
     it('Signin with invalid email', function (done) {
       request(app)
         .post('/graphql')
@@ -159,7 +149,6 @@ describe('Our application', function () {
 
     });
 
-
     it('Forgot password with a non-existing email id', function (done) {
       request(app)
         .post('/graphql')
@@ -175,7 +164,6 @@ describe('Our application', function () {
         })
     });
 
-
     it('Forgot password with an existing email id', function (done) {
       request(app)
         .post('/graphql')
@@ -189,7 +177,6 @@ describe('Our application', function () {
           done();
         })
     });
-
 
     it('Email validate with an invalid token', function (done) {
       request(app)
@@ -218,9 +205,8 @@ describe('Our application', function () {
           done()
         })
     });
-
-
   });
 
   /**** Authentication : END ****/
+
 });
