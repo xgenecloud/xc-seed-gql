@@ -33,7 +33,10 @@ describe('Our application', function () {
       }
 
 
-    })().then(done).catch(done);
+    })().then(done).catch(err => {
+      console.log(err);
+      done(err);
+    });
   });
 
 
